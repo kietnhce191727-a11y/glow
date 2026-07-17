@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLOW - Hệ Thống Mỹ Phẩm Chính Hãng</title>
+    <!-- Nhúng thư viện Bootstrap 5 có sẵn -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="top-bar">
+        <div><i class="fa-solid fa-phone"></i> Hotline: 1900 1900</div>
+        <div class="top-bar-right">
+            <span onclick="navigateTo('tracking-page')">Tra cứu đơn hàng</span>
+            <span onclick="navigateTo('promo-page')">Tin khuyến mãi</span>
+            <span onclick="navigateTo('blog-page')">Tin tức Beauty Tips</span>
+        </div>
+    </div>
+
+    <header>
+        <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-3">
+            <div class="logo" onclick="backToHomeDirect()"><img src="img/68c97c3d-d421-4e6d-b247-489cf3cd889d(1).png" alt="GLOW" style="height: 40px;"></div>
+            
+            <!-- Ô TÌM KIẾM TÍCH HỢP KHUNG GỢI Ý XỔ XUỐNG -->
+            <div class="search-box position-relative">
+                <input type="text" id="global-search" oninput="showSearchSuggestions()" placeholder="Tìm sản phẩm, danh mục hay thương hiệu mong muốn..." autocomplete="off">
+                <button onclick="applyFiltersAndSearch()"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <div id="search-suggestions" class="position-absolute bg-white border rounded shadow-sm w-100 d-none" style="top: 100%; left: 0; z-index: 1050; max-height: 320px; overflow-y: auto;"></div>
+            </div>
+            
+            <div class="header-actions">
+                <div class="action-item" id="account-btn" onclick="handleAccountClick()">
+                    <i class="fa-regular fa-user"></i> <span id="account-text">Tài khoản</span>
+                </div>
+                <div class="action-item position-relative" onclick="navigateTo('wishlist-page')">
+                    <i class="fa-regular fa-heart"></i> Yêu thích
+                    <span class="badge-custom" id="wishlist-badge">0</span>
+                </div>
+                <div class="cart-icon" onclick="navigateTo('cart-page')">
+                    <i class="fa-solid fa-basket-shopping"></i> Giỏ hàng
+                    <span class="badge-custom" id="cart-badge">0</span>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <ul class="main-nav-links" id="main-menu">
+                <li class="active-menu" id="menu-home" onclick="backToHomeDirect()">Trang Chủ</li>
+                <li onclick="filterCatalog('Trang Điểm')">Trang Điểm</li>
+                <li onclick="filterCatalog('Chăm Sóc Da')">Chăm Sóc Da</li>
+                <li onclick="filterCatalog('Chăm Sóc Cơ Thể')">Chăm Sóc Cơ Thể</li>
+                <li onclick="filterCatalog('Chăm Sóc Tóc')">Chăm Sóc Tóc</li>
+                <li onclick="filterCatalog('Tools & Brushes')">Tools & Brushes</li>
+                <li onclick="filterCatalog('Phụ Kiện')">Phụ Kiện</li>
+                <li onclick="filterCatalog('Dành Cho Nam')">Dành Cho Nam</li>
+                <li onclick="filterCatalog('Tất Cả Thương Hiệu')">Tất Cả Thương Hiệu</li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container-fluid container-main">
+
+        <div id="home-page" class="page-section active">
+            <!-- ĐÃ CẬP NHẬT: BANNER LỚN TỰ ĐỘNG LƯỚT NGANG 3 ẢNH XOAY VÒNG MƯỢT MÀ -->
+            <div id="glowBannerCarousel" class="carousel slide banner-large mb-4" data-bs-ride="carousel" data-bs-interval="4000">
+                <!-- Các nút chấm nhỏ định vị dưới banner -->
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#glowBannerCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#glowBannerCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#glowBannerCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                
+                <!-- Ruột chứa 3 hình ảnh lướt ngang -->
+                <div class="carousel-inner h-100">
+                    <!-- Ảnh 1 (Ảnh gốc của Kiệt) -->
+                    <div class="carousel-item active h-100">
+                        <img src="img/gq_wb2_banner_mo_ban_combo_skintint___lip_cheek_1920x480px_3286270c23fb4e1fa03ae49552a7c17e.webp" class="d-block w-100 h-100 object-fit-cover" alt="Chương trình khuyến mãi mùa hè 1" onerror="this.onerror=null; this.src='https://placehold.co/1200x400/f8c8dc/2c2c2c?text=GLOW+Banner+1';">
+                    </div>
+                    <!-- Ảnh 2 (Ảnh khuyến mãi Cocoon) -->
+                    <div class="carousel-item h-100">
+                        <img src="img/banner/ba471c31-c1ee-4131-93e7-9a66a1819cff.jpg" class="d-block w-100 h-100 object-fit-cover" alt="Chương trình ưu đãi hot 2" onerror="this.onerror=null; this.src='https://placehold.co/1200x400/d4af37/ffffff?text=GLOW+Banner+2';">
+                    </div>
+                    <!-- Ảnh 3 (Ảnh mỹ phẩm Glamrr Q) -->
+                    <div class="carousel-item h-100">
+                        <img src="img/banner/images (2).jpg" class="d-block w-100 h-100 object-fit-cover" alt="Bí quyết dưỡng da Beauty Tips 3" onerror="this.onerror=null; this.src='https://placehold.co/1200x400/2c2c2c/f8c8dc?text=GLOW+Banner+3';">
+                    </div>
+                </div>
+                
+                <!-- Hai nút mũi tên bấm lướt thủ công Trái / Phải -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#glowBannerCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Trước</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#glowBannerCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Sau</span>
+                </button>
+            </div>
+            
+            <div class="section-header">
+                <h2 class="section-title">Ưu đãi hot, đừng bỏ lỡ!!!</h2>
+            </div>
+            <p class="section-subtitle">Sản phẩm sẽ trở về giá gốc khi hết thời gian chương trình</p>
+            <div class="row row-cols-1 row-cols-md-4 g-4 mb-5" id="flash-sale-grid"></div>
+
+            <div class="section-header">
+                <h2 class="section-title">Top Sản Phẩm Bán Chạy</h2>
+            </div>
+            <div class="sub-categories mb-4">
+                <button class="sub-cat-btn active-sub" onclick="filterSubCatalog('ALL')">Tất cả</button>
+                <button class="sub-cat-btn" onclick="filterSubCatalog('Mặt Nạ')">Mặt Nạ</button>
+                <button class="sub-cat-btn" onclick="filterSubCatalog('Son Môi')">Son Môi</button>
+                <button class="sub-cat-btn" onclick="filterSubCatalog('Chăm Sóc Da')">Chăm Sóc Da</button>
+                <button class="sub-cat-btn" onclick="filterSubCatalog('Chăm Sóc Cơ Thể')">Chăm Sóc Cơ Thể</button>
+                <button class="sub-cat-btn" onclick="filterSubCatalog('Chăm Sóc Tóc')">Chăm Sóc Tóc</button>
+            </div>
+            <div class="row row-cols-1 row-cols-md-4 g-4 mb-5" id="bestseller-grid"></div>
+        </div>
+
+        <div id="catalog-page" class="page-section">
+            <div class="breadcrumb-custom mb-3"><span onclick="backToHomeDirect()">Trang chủ</span> / Danh mục / <span id="catalog-breadcrumb">Trang Điểm</span></div>
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <aside class="sidebar p-4 bg-white border rounded shadow-sm">
+                        <h3 class="fs-6 mb-3 fw-bold">Bạn đang tìm gì?</h3>
+                        <div class="filter-group mb-4">
+                            <h4>Khoảng giá</h4>
+                            <label class="filter-item"><input type="checkbox" class="price-box-filter" value="0-500000" onchange="applyFiltersAndSearch()"> 0 - 500.000đ</label>
+                            <label class="filter-item"><input type="checkbox" class="price-box-filter" value="500000-1000000" onchange="applyFiltersAndSearch()"> 500.000đ - 1.000.000đ</label>
+                            <label class="filter-item"><input type="checkbox" class="price-box-filter" value="1000000-9999999" onchange="applyFiltersAndSearch()"> Trên 1.000.000đ</label>
+                        </div>
+                        <div class="filter-group">
+                            <h4>Tất Cả Thương Hiệu</h4>
+                            <label class="filter-item"><input type="checkbox" class="brand-box-filter" value="COCOON" onchange="applyFiltersAndSearch()"> Cocoon</label>
+                            <label class="filter-item"><input type="checkbox" class="brand-box-filter" value="COLORKEY" onchange="applyFiltersAndSearch()"> Colorkey</label>
+                            <label class="filter-item"><input type="checkbox" class="brand-box-filter" value="GLAMRR Q" onchange="applyFiltersAndSearch()"> Glamrr Q</label>
+                            <label class="filter-item"><input type="checkbox" class="brand-box-filter" value="MD CARE" onchange="applyFiltersAndSearch()"> MD CARE</label>
+                            <label class="filter-item"><input type="checkbox" class="brand-box-filter" value="LA ROCHE POSAY" onchange="applyFiltersAndSearch()"> La Roche Posay</label>
+                            <label class="filter-item"><input type="checkbox" class="brand-box-filter" value="DOVE" onchange="applyFiltersAndSearch()"> Dove</label>
+                        </div>
+                    </aside>
+                </div>
+                <div class="col-md-9">
+                    <div class="catalog-toolbar d-flex justify-content-between align-items-center p-3 bg-white border rounded mb-4">
+                        <h2 class="fs-6 m-0 fw-bold" id="catalog-title">TRANG ĐIỂM</h2>
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="small fw-semibold text-nowrap">Sắp xếp:</span>
+                            <select id="sort-order" onchange="applyFiltersAndSearch()" class="form-select form-select-sm w-auto">
+                                <option value="default">Mặc định</option>
+                                <option value="asc">Giá tăng dần</option>
+                                <option value="desc">Giá giảm dần</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row row-cols-1 row-cols-md-4 g-4" id="catalog-grid"></div>
+                    <div class="pagination-container" id="pagination-container"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="detail-page" class="page-section">
+            <div class="breadcrumb-custom mb-3"><span onclick="backToHomeDirect()">Trang chủ</span> / Chi tiết sản phẩm</div>
+            <div class="row bg-white p-4 border rounded mb-4 g-4">
+                <div class="col-md-5"><div class="img-placeholder" style="height:350px; border-radius: 6px;">Hình ảnh sản phẩm</div></div>
+                <div class="col-md-7">
+                    <h1 class="fs-4 fw-bold mb-2" id="detail-title">Tên sản phẩm</h1>
+                    <p class="text-muted small mb-3">Thương hiệu: <strong id="detail-brand" style="color:var(--gold);">Brand</strong> | Tình trạng: <span class="text-success fw-bold">Còn hàng</span></p>
+                    <div class="p-3 mb-4 rounded border dashed" style="background:#fff5f8; border-color:var(--pastel-pink) !important;">
+                        <span class="fs-3 fw-bold text-dark" id="detail-price">0đ</span>
+                        <span class="text-muted text-decoration-line-through ms-3 small" id="detail-old-price">0đ</span>
+                    </div>
+                    <div class="d-flex align-items-center mb-4 gap-2">
+                        <span class="small fw-bold">Số lượng:</span>
+                        <button class="btn btn-sm btn-light border px-2" onclick="adjustDetailQty(-1)">-</button>
+                        <input type="text" id="detail-qty" value="1" readonly class="form-control form-control-sm text-center fw-bold" style="width:50px;">
+                        <button class="btn btn-sm btn-light border px-2" onclick="adjustDetailQty(1)">+</button>
+                    </div>
+                    <div class="d-flex gap-3">
+                        <button class="btn btn-outline-dark px-4 py-2 small fw-bold" onclick="addToCartFromDetail()">THÊM VÀO GIỎ</button>
+                        <button class="btn btn-dark px-4 py-2 small fw-bold" style="background:var(--gold); border-color:var(--gold);" onclick="buyNowFromDetail()">MUA NGAY</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tabs-container">
+                <div class="tabs-header">
+                    <div class="tab-btn active" onclick="switchTab(this, 'tab-info')">Giới thiệu / Mô tả / Công dụng</div>
+                    <div class="tab-btn" onclick="switchTab(this, 'tab-reviews')">Đánh giá khách hàng</div>
+                </div>
+                <div class="tab-content-panel active" id="tab-info">
+                    <p>Sản phẩm mỹ phẩm cao cấp phân phối chính hãng bảo vệ và phục hồi màng tế bào biểu bì sâu bên trong, chăm sóc sắc đẹp tối ưu.</p>
+                </div>
+                <div class="tab-content-panel" id="tab-reviews">
+                    <div id="product-reviews-list" class="mb-4"></div>
+                    <div class="review-form-box p-3 border rounded bg-light">
+                        <h4 class="fs-6 fw-bold mb-2">Viết chút cảm nghĩ của bạn về sản phẩm</h4>
+                        <div class="star-rating mb-2" id="review-stars">
+                            <i class="fa-solid fa-star" data-value="1"></i>
+                            <i class="fa-solid fa-star" data-value="2"></i>
+                            <i class="fa-solid fa-star" data-value="3"></i>
+                            <i class="fa-solid fa-star" data-value="4"></i>
+                            <i class="fa-solid fa-star" data-value="5"></i>
+                        </div>
+                        <div class="mb-3"><textarea id="review-comment" rows="3" class="form-control" placeholder="Chia sẻ trải nghiệm thực tế của bạn..."></textarea></div>
+                        <button class="btn btn-sm btn-dark" onclick="submitReview()">Gửi đánh giá</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="cart-page" class="page-section">
+            <h2 class="section-title mb-4">Giỏ hàng của bạn</h2>
+            <div class="row g-4">
+                <div class="col-md-8" id="cart-items-container"></div>
+                <div class="col-md-4">
+                    <div class="p-4 bg-white border rounded shadow-sm">
+                        <h3 class="fs-6 text-uppercase fw-bold mb-3">Tóm tắt đơn hàng</h3>
+                        <div class="d-flex justify-content-between mb-2"><span>Tạm tính</span><span id="cart-subtotal">0đ</span></div>
+                        <div class="d-flex justify-content-between mb-2"><span>Phí vận chuyển</span><span>15.000đ</span></div>
+                        <div class="d-flex justify-content-between border-top pt-3 fw-bold fs-5"><span>Tổng cộng</span><span id="cart-total" style="color:var(--gold);">0đ</span></div>
+                        <button class="btn btn-dark w-100 mt-4 py-2 fw-bold text-uppercase" onclick="navigateTo('checkout-page')">Tiến hành thanh toán</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="checkout-page" class="page-section">
+            <div class="breadcrumb-custom mb-3"><span onclick="backToHomeDirect()">Trang chủ</span> / Giỏ hàng / Thanh toán</div>
+            <div class="row g-4">
+                <div class="col-md-7">
+                    <div class="p-4 bg-white border rounded shadow-sm">
+                        <h3 class="fs-6 text-uppercase fw-bold mb-3">Thông tin giao hàng</h3>
+                        <div class="form-group mb-3"><label class="form-label fw-semibold small">Họ và tên người nhận *</label><input type="text" id="checkout-name" class="form-control" value="Hoàng Kiệt"></div>
+                        <div class="form-group mb-3"><label class="form-label fw-semibold small">Số điện thoại liên hệ *</label><input type="text" id="checkout-phone" class="form-control" placeholder="Nhập số điện thoại nhận hàng..."></div>
+                        <div class="form-group mb-3"><label class="form-label fw-semibold small">Địa chỉ cụ thể nhận hàng *</label><input type="text" id="checkout-address" class="form-control" value="Cái Răng, Cần Thơ"></div>
+                        <button class="btn btn-dark w-100 mt-4 py-2 fw-bold text-uppercase" onclick="placeOrder()">Xác nhận đặt hàng</button>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="p-4 bg-white border rounded shadow-sm">
+                        <h3 class="fs-6 text-uppercase fw-bold mb-3">Đơn hàng</h3>
+                        <div id="checkout-items-summary" class="mb-3 border-bottom pb-2"></div>
+                        <div class="d-flex justify-content-between fw-bold fs-5"><span>Tổng thanh toán</span><span id="checkout-total-bill" style="color:var(--gold);">0đ</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="wishlist-page" class="page-section">
+            <h2 class="section-title mb-4">Danh Sách Yêu Thích</h2>
+            <div class="row row-cols-1 row-cols-md-4 g-4" id="wishlist-grid"></div>
+        </div>
+
+        <div id="login-page" class="page-section">
+            <div class="auth-container bg-white border rounded shadow-sm">
+                <h2 class="text-center text-uppercase fs-5 fw-bold mb-4">Đăng Nhập</h2>
+                <div class="form-group mb-3">
+                    <label class="form-label fw-semibold small">Địa chỉ Email</label>
+                    <input type="email" class="form-control" placeholder="Nhập email...">
+                </div>
+                <div class="form-group mb-4">
+                    <label class="form-label fw-semibold small">Mật khẩu</label>
+                    <input type="password" class="form-control" placeholder="Nhập mật khẩu...">
+                </div>
+                <button class="btn-submit w-100 py-2" onclick="handleLogin()">Đăng nhập</button>
+                
+                <div class="text-center my-3 text-muted small position-relative">
+                    <hr class="my-2">
+                    <span class="bg-white px-2 position-absolute top-50 start-50 translate-middle">Hoặc đăng nhập bằng</span>
+                </div>
+                <div class="d-flex gap-2 mb-3">
+                    <button class="btn btn-outline-danger w-50 small fw-semibold" onclick="handleLogin()"><i class="fa-brands fa-google me-1"></i> Google</button>
+                    <button class="btn btn-outline-primary w-50 small fw-semibold" onclick="handleLogin()"><i class="fa-brands fa-facebook-f me-1"></i> Facebook</button>
+                </div>
+
+                <button class="btn btn-outline-dark w-100 py-2 mt-2 small fw-semibold" onclick="navigateTo('register-page')">Chưa có tài khoản? Đăng ký ngay</button>
+            </div>
+        </div>
+
+        <div id="register-page" class="page-section">
+            <div class="auth-container bg-white border rounded shadow-sm">
+                <h2 class="text-center text-uppercase fs-5 fw-bold mb-4">Đăng Ký Tài Khoản</h2>
+                <div class="form-group mb-3"><label class="form-label fw-semibold small">Họ và tên *</label><input type="text" id="reg-name" class="form-control" value="Hoàng Kiệt"></div>
+                <div class="form-group mb-3"><label class="form-label fw-semibold small">Số điện thoại *</label><input type="text" id="reg-phone" class="form-control" placeholder="Nhập số điện thoại..."></div>
+                <div class="form-group mb-3"><label class="form-label fw-semibold small">Địa chỉ Email *</label><input type="email" class="form-control" placeholder="Nhập địa chỉ email..."></div>
+                <div class="form-group mb-3"><label class="form-label fw-semibold small">Mật khẩu *</label><input type="password" id="reg-password" class="form-control" placeholder="Tạo mật khẩu..."></div>
+                <div class="form-group mb-4"><label class="form-label fw-semibold small">Xác nhận mật khẩu *</label><input type="password" id="reg-confirm" class="form-control" placeholder="Nhập lại mật khẩu..."></div>
+                <button class="btn-submit w-100 py-2" onclick="handleRegister()">Tạo tài khoản mới</button>
+                
+                <div class="text-center my-3 text-muted small position-relative">
+                    <hr class="my-2">
+                    <span class="bg-white px-2 position-absolute top-50 start-50 translate-middle">Hoặc đăng ký bằng</span>
+                </div>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-outline-danger w-50 small fw-semibold" onclick="handleRegister()"><i class="fa-brands fa-google me-1"></i> Google</button>
+                    <button class="btn btn-outline-primary w-50 small fw-semibold" onclick="handleRegister()"><i class="fa-brands fa-facebook-f me-1"></i> Facebook</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="tracking-page" class="page-section">
+            <div class="auth-container bg-white border rounded shadow-sm">
+                <h2 class="text-center text-uppercase fs-5 fw-bold mb-4">Tra cứu đơn hàng</h2>
+                <div class="form-group mb-3"><label class="form-label fw-semibold small">Mã đơn hàng</label><input type="text" class="form-control" placeholder="Ví dụ: GLOW123"></div>
+                <div class="form-group mb-4"><label class="form-label fw-semibold small">Số điện thoại nhận hàng</label><input type="text" class="form-control" placeholder="Nhập số điện thoại..."></div>
+                <button class="btn-submit w-100 py-2" onclick="alert('Đã ghi nhận thông tin khách hàng, chúng tôi sẽ liên hệ lại sau.')">Tìm kiếm</button>
+            </div>
+        </div>
+
+        <div id="blog-page" class="page-section">
+            <h2 class="section-title mb-4">Beauty Tips</h2>
+            <p class="section-subtitle">Cập nhật xu hướng làm đẹp và bí quyết chăm sóc da khoa học cùng các chuyên gia</p>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col">
+                    <div class="product-card p-3 h-100">
+                        <div class="img-box" style="height: 180px;">
+                            <img src="img/mh2-2-1759062914214556715320-57-0-932-1400-crop-1759065007835411889086.webp" alt="Bí quyết dưỡng ẩm mùa đông" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; this.src='https://placehold.co/400x250/f8c8dc/2c2c2c?text=Thieu+Anh+img/blog-1.png';">
+                        </div>
+                        <div class="brand-name mt-2">Chăm Sóc Da</div>
+                        <h3 class="fs-6 fw-bold my-2" style="line-height: 1.4; min-height: 38px;">Bí quyết dưỡng ẩm cho làn da khô ráp vào mùa đông</h3>
+                        <p class="text-muted small flex-grow-1">Làn da nứt nẻ luôn là nỗi lo lắng của many chị em khi trời lạnh. Hãy cùng GLOW khám phá các bước dưỡng ẩm sâu hiệu quả...</p>
+                        <div class="border-top pt-2 mt-3 d-flex justify-content-between align-items-center">
+                            <span class="small text-muted" style="font-size: 11px;">16/07/2026</span>
+                            <button class="btn btn-sm btn-dark" style="font-size: 11px; padding: 3px 8px;" onclick="alert('Tính năng đọc bài viết đang được xây dựng!')">Đọc tiếp</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="product-card p-3 h-100">
+                        <div class="img-box" style="height: 180px;">
+                            <img src="img/images.jpg" alt="Cách trang điểm tự nhiên" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; this.src='https://placehold.co/400x250/f8c8dc/2c2c2c?text=Thieu+Anh+img/blog-2.png';">
+                        </div>
+                        <div class="brand-name mt-2">Trang Điểm</div>
+                        <h3 class="fs-6 fw-bold my-2" style="line-height: 1.4; min-height: 38px;">Cách trang điểm tự nhiên "no-makeup makeup" trong veo</h3>
+                        <p class="text-muted small flex-grow-1">Bí quyết sở hữu lớp nền mỏng nhẹ như sương, che khuyết điểm tốt giúp bạn tự tin toả sáng suốt ngày dài năng động...</p>
+                        <div class="border-top pt-2 mt-3 d-flex justify-content-between align-items-center">
+                            <span class="small text-muted" style="font-size: 11px;">15/07/2026</span>
+                            <button class="btn btn-sm btn-dark" style="font-size: 11px; padding: 3px 8px;" onclick="alert('Tính năng đọc bài viết đang được xây dựng!')">Đọc tiếp</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="product-card p-3 h-100">
+                        <div class="img-box" style="height: 180px;">
+                            <img src="img/images (1).jpg" alt="Dưỡng da nam" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; this.src='https://placehold.co/400x250/f8c8dc/2c2c2c?text=Thieu+Anh+img/blog-3.png';">
+                        </div>
+                        <div class="brand-name mt-2">Dành Cho Nam</div>
+                        <h3 class="fs-6 fw-bold my-2" style="line-height: 1.4; min-height: 38px;">Các bước dưỡng da tối giản dành cho nam giới bận rộn</h3>
+                        <p class="text-muted small flex-grow-1">Chỉ với 3 bước chăm sóc da vô cùng đơn giản và nhanh chóng, phái nam đã có thể bảo vệ tối đa làn da khỏe mạnh...</p>
+                        <div class="border-top pt-2 mt-3 d-flex justify-content-between align-items-center">
+                            <span class="small text-muted" style="font-size: 11px;">14/07/2026</span>
+                            <button class="btn btn-sm btn-dark" style="font-size: 11px; padding: 3px 8px;" onclick="alert('Tính năng đọc bài viết đang được xây dựng!')">Đọc tiếp</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="promo-page" class="page-section">
+            <h2 class="section-title mb-4">Tin Khuyến Mãi</h2>
+            <p class="section-subtitle">Đừng bỏ lỡ các chương trình ưu đãi lớn nhất trong tháng tại hệ thống GLOW</p>
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                <div class="col">
+                    <div class="product-card p-3 h-100">
+                        <div class="img-box" style="height: 220px;">
+                            <img src="img/product/md-care-13.jpg" alt="Sale shock 50%" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; this.src='https://placehold.co/600x250/f8c8dc/2c2c2c?text=Thieu+Anh+img/promo-1.png';">
+                        </div>
+                        <h3 class="fs-5 fw-bold my-3">Đại Tiệc Summer Sale - Giảm Sốc Lên Đến 50% Toàn Bộ Sản Phẩm</h3>
+                        <p class="text-muted small">Cơ hội vàng duy nhất trong năm để bạn mua sắm thả ga không lo về giá tất cả thương hiệu mỹ phẩm chính hãng hàng đầu tại GLOW. Chương trình diễn ra từ ngày 15/07 đến hết 31/07.</p>
+                        <div class="border-top pt-2 mt-3 d-flex justify-content-between align-items-center">
+                            <span class="badge bg-danger" style="padding: 6px 12px; font-size: 11px;">Đang diễn ra</span>
+                            <button class="btn btn-sm btn-dark" onclick="alert('Chương trình đang áp dụng tự động trên các sản phẩm!')">Xem ngay</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="product-card p-3 h-100">
+                        <div class="img-box" style="height: 220px;">
+                            <img src="img/product/md-care-11.png" alt="Mua 1 tặng 1" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; this.src='https://placehold.co/600x250/f8c8dc/2c2c2c?text=Thieu+Anh+img/promo-2.png';">
+                        </div>
+                        <h3 class="fs-5 fw-bold my-3">Deal Độc Quyền Cocoon: Mua 1 Tặng 1 Toàn Bộ Dòng Tẩy Tế Bào Chết</h3>
+                        <p class="text-muted small">Cưng chiều làn da thuần chay cùng Cocoon! Nhận ngay một quà tặng full-size tương đương khi mua sắm bất kỳ sản phẩm tẩy tế bào chết cà phê Đắk Lắk trong thời gian khuyến mãi.</p>
+                        <div class="border-top pt-2 mt-3 d-flex justify-content-between align-items-center">
+                            <span class="badge bg-warning text-dark" style="padding: 6px 12px; font-size: 11px;">Deal Đặc Biệt</span>
+                            <button class="btn btn-sm btn-dark" style="font-size: 11px; padding: 3px 8px warm;">Nhận ưu đãi</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="container-fluid px-0">
+            <div class="row row-cols-1 row-cols-md-4 g-4 mb-4">
+                <div class="col">
+                    <h4 class="fs-6 fw-bold text-uppercase mb-3" style="color:var(--gold);">GLOW COSMETICS</h4>
+                    <p class="text-muted small">Hệ thống cung cấp mỹ phẩm chính hãng toàn quốc, uy tín và an toàn hàng đầu.</p>
+                </div>
+                <div class="col"><h4>Về chúng tôi</h4><ul><li>Câu chuyện thương hiệu</li><li>Tuyển dụng</li></ul></div>
+                <div class="col"><h4>Chính sách</h4><ul><li>Hướng dẫn đặt mua</li><li>Chính sách đổi trả</li></ul></div>
+                <div class="col">
+                    <h4>Ứng dụng</h4>
+                    <div style="height:35px; width:120px;" class="mb-2"><div class="img-placeholder">App Store</div></div>
+                    <div style="height:35px; width:120px;"><div class="img-placeholder">Google Play</div></div>
+                </div>
+            </div>
+            <div class="border-top pt-3 d-flex justify-content-between text-muted small flex-wrap">
+                <div>© 2026 GLOW. All rights reserved.</div>
+                <div class="fw-bold text-dark">ĐÃ THÔNG BÁO BỘ CÔNG THƯƠNG</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Thêm tệp Script của Bootstrap để xử lý chuyển động Carousel lướt ngang -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    
+    <!-- MÃ NHÚNG TYPEBOT BONG BÓNG CHAT -->
+    <script type="module">
+        import Typebot from 'https://cdn.jsdelivr.net/npm/@typebot.io/js@0.3/dist/web.js'
+
+        Typebot.initBubble({
+            typebot: "my-typebot-szncgan",
+            apiHost: "https://typebot.io",
+            theme: {
+                button: {
+                    backgroundColor: "#F8C8DC",
+                    iconColor: "#2c2c2c",
+                    size: "medium"
+                },
+                previewMessage: {
+                    backgroundColor: "#FFFFFF",
+                    textColor: "#2c2c2c",
+                    closeButtonBackgroundColor: "#2c2c2c",
+                    closeButtonIconColor: "#FFFFFF"
+                }
+            }
+        });
+    </script>
+</body>
+</html>

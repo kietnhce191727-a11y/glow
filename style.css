@@ -1,0 +1,538 @@
+/* =========================================================================
+   STYLE.CSS - BẢN CẬP NHẬT TỔNG HỢP TOÀN DIỆN (ĐÃ FIX LỖI CÁNH HOA ĐÀO RƠI)
+   ========================================================================= */
+
+:root {
+    --pastel-pink: #F8C8DC;
+    --gold: #D4AF37;
+    --dark-slate: #2C2C2C;
+    --light-bg: #FAFAFA;
+    --border-color: #EAEAEA;
+    --star-color: #FFD700;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-bg);
+    color: var(--dark-slate);
+}
+
+/* HIỆU ỨNG CÁNH HOA ĐÀO RƠI LẢ TẢ MÀU HỒNG PASTEL - ĐÃ FIX 100% */
+.cherry-blossom {
+    position: fixed;
+    top: -10px;
+    z-index: 9999;
+    pointer-events: none; /* Khách hàng click chuột xuyên qua cánh hoa bình thường */
+    border-radius: 50% 0 50% 50%;
+    background: linear-gradient(135deg, #ffb7c5, #f8c8dc);
+    opacity: 0.8;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% {
+        top: -10px;
+        transform: translateX(0) rotate(0deg);
+        opacity: 0.8;
+    }
+    100% { /* ĐÃ SỬA: Thêm dấu % vào đây để hoa rơi xuống dưới */
+        top: 100vh;
+        transform: translateX(100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* 1. TOP BAR */
+.top-bar {
+    background-color: var(--dark-slate);
+    color: #FFFFFF;
+    padding: 10px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 500;
+}
+.top-bar-right {
+    display: flex;
+    gap: 20px; 
+}
+.top-bar-right span {
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.top-bar-right span:hover {
+    color: var(--pastel-pink);
+}
+
+/* 2. HEADER & NAVIGATION */
+header {
+    background-color: #FFFFFF;
+    padding: 20px 24px 10px 24px;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 24px;
+    color: var(--dark-slate);
+}
+
+.search-box {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    align-items: center; 
+}
+.search-box input {
+    width: 100%;
+    padding: 10px 16px;
+    border: 1px solid var(--border-color);
+    border-right: none;
+    border-radius: 20px 0 0 20px; 
+    outline: none;
+    font-size: 13px;
+    height: 42px; 
+    transition: border-color 0.2s;
+}
+.search-box input:focus {
+    border-color: var(--pastel-pink);
+}
+.search-box button {
+    height: 42px; 
+    padding: 0 20px;
+    border: 1px solid var(--border-color);
+    background-color: #FFFFFF;
+    border-radius: 0 20px 20px 0; 
+    cursor: pointer;
+    color: var(--dark-slate);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+.search-box button:hover {
+    background-color: var(--pastel-pink);
+    border-color: var(--pastel-pink);
+}
+
+#search-suggestions {
+    border-radius: 12px !important;
+    border: 1px solid var(--border-color) !important;
+    margin-top: 5px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08) !important;
+    overflow: hidden; 
+}
+.suggestion-item {
+    border-bottom: 1px solid #F5F5F5;
+    padding: 10px 12px !important;
+}
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+.suggestion-item:hover {
+    background-color: #FFF5F8 !important;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+.action-item, .cart-icon {
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--dark-slate);
+}
+.badge-custom {
+    background-color: var(--gold);
+    color: #FFFFFF;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-weight: 700;
+}
+
+.main-nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center; 
+    gap: 28px;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+.main-nav-links li {
+    font-size: 13px;
+    font-weight: 700;
+    text-uppercase: uppercase;
+    cursor: pointer;
+    color: #666666;
+    padding-bottom: 6px;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+}
+.main-nav-links li:hover, .main-nav-links li.active-menu {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+}
+
+/* 3. LAYOUT CONTAINER MÀN HÌNH CHÍNH */
+.container-main {
+    padding: 24px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+.page-section {
+    display: none;
+}
+.page-section.active {
+    display: block;
+}
+
+/* KHUNG BANNER LỚN SLIDER */
+.banner-large {
+    width: 100%;
+    height: 380px; 
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.carousel-indicators [data-bs-target] {
+    background-color: var(--gold);
+}
+
+.section-header {
+    margin-top: 20px;
+    border-left: 4px solid var(--pastel-pink);
+    padding-left: 12px;
+}
+.section-title {
+    font-size: 20px;
+    font-weight: 800;
+    text-uppercase: uppercase;
+    margin: 0;
+    color: var(--dark-slate);
+}
+.section-subtitle {
+    font-size: 13px;
+    color: #888888;
+    margin: 4px 0 20px 16px;
+}
+
+/* 4. PRODUCT CARDS */
+.product-card {
+    background-color: #FFFFFF;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 16px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+.product-card .img-box {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-bottom: 12px;
+    cursor: pointer;
+    background-color: #FFFFFF;
+}
+
+.product-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 4px;
+    transition: transform 0.3s ease;
+    background-color: #FFFFFF;
+}
+.product-card:hover .product-img {
+    transform: scale(1.04);
+}
+
+.brand-name {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gold);
+    text-uppercase: uppercase;
+    margin-bottom: 4px;
+}
+.product-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--dark-slate);
+    line-height: 1.4;
+    height: 38px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    cursor: pointer;
+    margin-bottom: 12px;
+}
+.product-name:hover {
+    color: var(--gold);
+}
+
+.card-footer-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+.price-box {
+    display: flex;
+    flex-direction: column;
+}
+.current-price {
+    font-size: 15px;
+    color: #D9534F;
+}
+.old-price {
+    font-size: 11px;
+    text-decoration: line-through;
+    color: #A0A0A0;
+}
+.card-actions {
+    display: flex;
+    gap: 8px;
+}
+.icon-btn {
+    border: 1px solid var(--border-color);
+    background-color: #FFFFFF;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #555555;
+    transition: all 0.2s;
+    font-size: 13px;
+}
+.icon-btn:hover {
+    background-color: var(--pastel-pink);
+    border-color: var(--pastel-pink);
+    color: var(--dark-slate);
+}
+.active-heart {
+    background-color: #FFF0F5;
+    border-color: #FFC0CB;
+    color: #D9534F !important;
+}
+
+.sub-categories {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+}
+.sub-cat-btn {
+    border: 1px solid var(--border-color);
+    background-color: #FFFFFF;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+.sub-cat-btn:hover, .sub-cat-btn.active-sub {
+    background-color: var(--pastel-pink);
+    border-color: var(--pastel-pink);
+    color: var(--dark-slate);
+}
+
+/* 5. CÁC KHUNG TRANG CON */
+.auth-container {
+    max-width: 420px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #FFFFFF;
+}
+.btn-submit {
+    background-color: var(--dark-slate);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.btn-submit:hover {
+    background-color: #000000;
+}
+
+.breadcrumb-custom {
+    font-size: 12px;
+    color: #777777;
+}
+.breadcrumb-custom span {
+    cursor: pointer;
+}
+.breadcrumb-custom span:hover {
+    color: var(--gold);
+}
+
+.tabs-container {
+    margin-top: 30px;
+    background-color: #FFFFFF;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+}
+.tabs-header {
+    display: flex;
+    background-color: #F9F9F9;
+    border-bottom: 1px solid var(--border-color);
+}
+.tab-btn {
+    padding: 14px 24px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    border-right: 1px solid var(--border-color);
+    transition: background 0.2s;
+}
+.tab-btn.active {
+    background-color: #FFFFFF;
+    border-bottom: 2px solid var(--gold);
+}
+.tab-content-panel {
+    padding: 24px;
+    display: none;
+    font-size: 13px;
+    line-height: 1.6;
+}
+.tab-content-panel.active {
+    display: block;
+}
+
+.star-rating i {
+    font-size: 18px;
+    color: #CCC;
+    cursor: pointer;
+    margin-right: 4px;
+}
+.star-rating i.selected {
+    color: var(--star-color);
+}
+.review-card {
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 10px;
+}
+
+.sidebar h4 {
+    font-size: 12px;
+    font-weight: 700;
+    text-uppercase: uppercase;
+    margin-bottom: 10px;
+    color: #555555;
+}
+.filter-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    margin-bottom: 6px;
+    cursor: pointer;
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 30px;
+}
+.page-item-custom {
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border-color);
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.page-item-custom:hover, .page-item-custom.active {
+    background-color: var(--dark-slate);
+    color: #FFFFFF;
+    border-color: var(--dark-slate);
+}
+.page-item-custom.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* 6. FOOTER */
+footer {
+    background-color: #FFFFFF;
+    border-top: 1px solid var(--border-color);
+    padding: 40px 24px 20px 24px;
+    margin-top: 60px;
+}
+footer h4 {
+    font-size: 13px;
+    font-weight: 700;
+    text-uppercase: uppercase;
+    margin-bottom: 16px;
+}
+footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+footer ul li {
+    font-size: 12px;
+    color: #666666;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+footer ul li:hover {
+    color: var(--gold);
+}
+.img-placeholder {
+    background-color: #F0F0F0;
+    color: #777777;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+}
